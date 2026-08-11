@@ -1,0 +1,15 @@
+checkpoints/*
+!checkpoints/.gitkeep
+results/*
+!results/.gitkeep
+logs/*
+!logs/.gitkeep
+squad_dataset/*.json
+!squad_dataset/README.md
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.DS_Store
+.vscode/
+.idea/
