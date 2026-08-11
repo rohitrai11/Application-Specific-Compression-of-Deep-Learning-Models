@@ -1,0 +1,1 @@
+See the top-level README for the repository tree. Key source roots are `baselines/NLI`, `baselines/PI`, `baselines/EQA`, and `asc/{NLI,PI,EQA}`. Generated datasets, checkpoints, predictions, similarity matrices, results, and logs are excluded from Git tracking by `.gitignore`.

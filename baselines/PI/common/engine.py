@@ -1,0 +1,20 @@
+from __future__ import annotations
+import time
+from pathlib import Path
+import torch
+from tqdm import tqdm
+def train_one_epoch(model,dataloader,optimizer,device,log_every=100):
+ model.train(); loss_sum=acc_sum=0.; steps=correct=total=0
+ for b in tqdm(dataloader,desc='train',ncols=100):
+  ids=b['ids'].to(device); mask=b['mask'].to(device); tt=b['token_type_ids'].to(device); y=b['target'].to(device).view(-1); optimizer.zero_grad(set_to_none=True); loss,p=model(ids,mask,tt,y); loss.backward(); optimizer.step(); pred=p.argmax(1); loss_sum+=loss.item(); acc_sum+=(pred==y).float().mean().item(); steps+=1; correct+=(pred==y).sum().item(); total+=y.numel()
+ return {'loss_sum':loss_sum,'accuracy':acc_sum/max(steps,1),'sample_accuracy':correct/max(total,1)}
+@torch.no_grad()
+def evaluate(model,dataloader,device,desc='eval'):
+ model.eval(); loss_sum=acc_sum=0.; steps=correct=total=0; predictions=[]; probabilities=[]; t=time.perf_counter()
+ for b in tqdm(dataloader,desc=desc,ncols=100):
+  ids=b['ids'].to(device); mask=b['mask'].to(device); tt=b['token_type_ids'].to(device); y=b['target'].to(device).view(-1); loss,p=model(ids,mask,tt,y); pred=p.argmax(1); loss_sum+=loss.item(); acc_sum+=(pred==y).float().mean().item(); steps+=1; correct+=(pred==y).sum().item(); total+=y.numel(); predictions.extend(pred.cpu().tolist()); probabilities.extend(p.cpu().tolist())
+ return {'loss_sum':loss_sum,'accuracy':acc_sum/max(steps,1),'sample_accuracy':correct/max(total,1),'elapsed_seconds':time.perf_counter()-t,'examples':total,'predictions':predictions,'probabilities':probabilities}
+def save_predictions(result,output_dir,prefix):
+ out=Path(output_dir); out.mkdir(parents=True,exist_ok=True); (out/f'pred_{prefix}.txt').write_text('\n'.join(str(x) for x in result['predictions'])+'\n')
+ with (out/f'prob_{prefix}.txt').open('w') as fh:
+  for row in result['probabilities']: fh.write(' '.join(f'{p:.10g}' for p in row)+'\n')

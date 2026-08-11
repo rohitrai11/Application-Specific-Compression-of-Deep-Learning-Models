@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+checkpoints/*
+!checkpoints/.gitkeep
+predictions/*
+!predictions/.gitkeep
+dataset/*.pkl
+*.log
+live.txt

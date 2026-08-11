@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+.venv/
+checkpoints/
+predictions/
+*.out
+*.log
+nohup.out
+snli_1.0/

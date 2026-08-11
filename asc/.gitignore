@@ -1,0 +1,35 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.DS_Store
+.vscode/
+.idea/
+
+# Datasets
+NLI/snli_1.0/*.txt
+PI/dataset/*.pkl
+EQA/squad_dataset/*.json
+
+# Checkpoints / generated results
+NLI/checkpoints/*
+NLI/similarity/*
+NLI/predictions/*
+PI/checkpoints/*
+PI/similarity/*
+PI/predictions/*
+EQA/checkpoints/*
+EQA/similarity/*
+EQA/predictions/*
+logs/*
+
+!NLI/checkpoints/.gitkeep
+!NLI/similarity/.gitkeep
+!NLI/predictions/.gitkeep
+!PI/checkpoints/.gitkeep
+!PI/similarity/.gitkeep
+!PI/predictions/.gitkeep
+!EQA/checkpoints/.gitkeep
+!EQA/similarity/.gitkeep
+!EQA/predictions/.gitkeep
+!logs/.gitkeep

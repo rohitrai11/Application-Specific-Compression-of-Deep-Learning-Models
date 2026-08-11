@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.DS_Store
+.vscode/
+.idea/
+
+# Large datasets and generated artifacts are ignored inside the task packages
+# by their own .gitignore files.
