@@ -722,6 +722,3 @@ If you use this repository, cite the publication associated with the ASC method:
 
 **Application Specific Compression of Deep Learning Models**, presented at
 ACM CoDS-COMAD, December 2024.
-
-Add the final bibliographic metadata/DOI in this section before public release
-if desired.
